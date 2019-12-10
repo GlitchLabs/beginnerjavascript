@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clousures</title>
+</head>
+
+<body>
+    <!-- <script src="./closures.js"></script> -->
+    <script>
+        // function parent() {
+        //     const parentBusiness = `Dont you see grown folks is talking`
+        //     console.count(`from the parent`)
+        //     function child() {
+        //         const childBusiness = `I am doing child things oh what did i just hear?`
+        //         console.log(childBusiness)
+        //         console.log(parentBusiness)
+        //         console.count("inside parent and child this was ran")
+        //     }
+        //     child()
+        //     return child
+        // }
+        // parent()
+        // let stepChild = parent();
+        // stepChild();
+        // stepChild();
+
+        // function check(player) {
+        //     let score = 0;
+        //     console.count("check chekced")
+        //     return function color() {
+        //         score++;
+        //         return `${player} score is ${score}`
+        //     }
+        // }
+        // const player1 = check("player1");
+        function Top() {
+            let hope = "holla "
+            let changer = 0;
+            return function () {
+                hope = (changer % 2) == 0 ? "new found hope" : "where shall we get hope now"
+                changer++;
+                return `what is is? ${hope}`
+
+            }
+        }
+        let tippy = Top();
+    </script>
+</body>
+
+</html>
