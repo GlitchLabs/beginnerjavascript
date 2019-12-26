@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../base.css" />
+    <title>new-this-proptype-classes</title>
+  </head>
+  <body>
+    <button class="one">click on me</button>
+    <button class="two">click me fool</button>
+
+    <script>
+      function Pizza(toppings = [], customer) {
+        console.log("Making a Pizza");
+        this.toppings = toppings;
+        this.customer = customer;
+        this.id = Math.floor(Math.random() * 16777215).toString(16);
+      }
+      Pizza();
+      const goodSlice = new Pizza(
+        ["cheese", "chicken", "bacon", "ranch"],
+        "dakir"
+      );
+      console.log(goodSlice);
+      const button1 = document.querySelector(".one");
+      const button2 = document.querySelector(".two");
+      function tellMeAboutTheButton() {
+        console.log(this);
+        setTimeout(() => {
+          console.log(this);
+          this.textContent = "you clicked the wrong one!";
+        }, 1000);
+      }
+      function changeMe(event) {
+        console.log(this);
+        console.log(event.currentTarget);
+        setTimeout(() => {
+          console.log(this);
+          this.textContent = "damit you clicked!";
+        }, 1000);
+      }
+      button1.addEventListener("click", changeMe);
+      button2.addEventListener("click", changeMe);
+    </script>
+  </body>
+</html>

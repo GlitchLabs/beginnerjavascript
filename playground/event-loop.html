@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../base.css" />
+    <title>event loop</title>
+  </head>
+  <body>
+    <style>
+      .go {
+        margin: 5rem;
+        background: white;
+        padding: 5rem;
+        width: 25rem;
+        transition: all 0.5s;
+      }
+      .circle {
+        border-radius: 100%;
+        width: 15rem;
+      }
+      .red {
+        background: red;
+        color: white;
+        /* transition: all 2s; */
+      }
+      .purple {
+        background: purple;
+        color: aqua;
+      }
+      .square {
+        border-radius: 0%;
+        width: 25rem;
+      }
+      .fadeout {
+        opacity: 0;
+      }
+    </style>
+    <div class="go">click ya boy</div>
+    <script>
+      const goDiv = document.querySelector(".go");
+      goDiv.addEventListener("click", function() {
+        goDiv.textContent = "Go!!";
+        setTimeout(function circleize(e) {
+          goDiv.classList.add("circle");
+          setTimeout(function() {
+            goDiv.classList.add("red");
+            setTimeout(function() {
+              goDiv.classList.remove("circle");
+              goDiv.classList.add("square");
+              setTimeout(function() {
+                goDiv.classList.add("purple");
+                setTimeout(function() {
+                  goDiv.classList.add("fadeout");
+                }, 500);
+              }, 300);
+            }, 250);
+          }, 500);
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>
