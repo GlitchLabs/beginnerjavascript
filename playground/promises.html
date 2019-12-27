@@ -4,28 +4,113 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <link rel="stylesheet" href="../base.css" />
+    <title>Promises</title>
   </head>
   <body>
     <script>
-      function makePizza(toppings) {
-        const pizzaPromise = new Promise(function(resolve, reject) {
+      function makePizza(toppings = []) {
+        // const pizzaPromise
+        let bakeTime = 500 + toppings.length * 200;
+        console.log(bakeTime);
+
+        return new Promise(function(resolve, reject) {
+          console.log("checking for pinapple one sec...");
           setTimeout(function() {
-            resolve(`mmmhhh pizza pizza oh and with ${toppings}`);
-          }),
-            1000;
+            toppings.includes("pinapple")
+              ? reject("we dont server your kind savage")
+              : console.log(
+                  `pizza is cooking wait time is ${bakeTime / 1000} seconds`,
+                  setTimeout(function() {
+                    resolve(`mmmhhh pizza pizza oh and with ${toppings}`);
+                  }, bakeTime)
+                );
+          }, 2000);
+          //console.log(result);
         });
 
-        return pizzaPromise;
+        // return pizzaPromise;
       }
-      const pizza = makePizza(["ranch", "saussage"]);
-      console.log(pizza);
-      setTimeout(function() {
-        pizza.then(function(pizza) {
-          console.log("about damn time");
+      // makePizza(["ranch", "saussage"]).then(function(pizza) {
+      //   console.log(pizza);
+      //   return makePizza(["pinapple", "bacon"]).then(function(cool) {
+      //     console.log(cool);
+      //     return makePizza([
+      //       "saussage",
+      //       "pepparoni",
+      //       "cheese",
+      //       "meatball",
+      //       "herbs"
+      //     ]).then(function(theQueensPizza) {
+      //       console.log(theQueensPizza);
+      //     });
+      //   });
+      // });
+
+      //get the promises concurrently
+      pizzaOrder1 = makePizza(["cheese", "ham", "peppers", "guda"]);
+      pizzaOrder2 = makePizza(["cheese", "ham"]);
+      pizzaOrder3 = makePizza([
+        "cheese",
+        "ham",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "cheese",
+        "ham",
+        "bananna",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six"
+      ]);
+
+      const dinnerPromise = Promise.all([
+        pizzaOrder1,
+        pizzaOrder2,
+        pizzaOrder3
+      ]);
+      dinnerPromise.then(pizzas => {
+        for (food of pizzas) {
+          console.log(food);
+        }
+      });
+      const firstPizza = Promise.race([pizzaOrder1, pizzaOrder2, pizzaOrder3]);
+      firstPizza.then(pizza => {
+        console.log("first up");
+
+        console.log(pizza);
+      });
+      console.log("promise chain");
+      makePizza(["cheese", "gudda", "pinapple"]).then(pizza => {
+        console.log(pizza);
+      });
+      // .catch(err => {
+      //   console.log(err);
+      //   console.log("well I say!!!");
+      // });
+      makePizza(["cheese", "gudda", "apples"])
+        .then(pizza => {
           console.log(pizza);
+        })
+        .catch(err => {
+          console.log(err);
+          console.log("well I say!!!");
         });
-      }, 3000);
+
+      const p1 = makePizza(["people"]);
+      const p2 = makePizza(["pinapple"]);
+      const dinner2 = Promise.allSettled([p1, p2]);
+
+      dinner2.then(res => {
+        console.log(res);
+        const status = res[0].status;
+        console.log(status);
+      });
     </script>
   </body>
 </html>

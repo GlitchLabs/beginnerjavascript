@@ -1,0 +1,44 @@
+<!-- 
+    A-asynchronous 
+    J-javascript
+    A-and
+    X-xml
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../base.css" />
+    <title>apis</title>
+  </head>
+  <body>
+    <script>
+      function handleError(err) {
+        console.log("who screwed this important mission up?");
+        console.log(err);
+      }
+      //endpoint is the url that you need to visit to get the data
+      const endpoint = "https://api.github.com/users/GlitchLabs";
+      const endpoint2 = "http://pokeapi.co/api/v2/pokemon/ditto/";
+      const dakirPromise = fetch(endpoint);
+      console.log(dakirPromise);
+      dakirPromise
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(handleError);
+
+      //async await style
+      async function asyncStyleFetch(endpoint) {
+        const promise = await fetch(endpoint);
+        console.log(promise);
+      }
+      asyncStyleFetch(endpoint);
+    </script>
+  </body>
+</html>
