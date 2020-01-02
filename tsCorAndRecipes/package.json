@@ -1,0 +1,11 @@
+{
+  "name": "tscorandrecipes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts.ts",
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "author": "",
+  "license": "ISC"
+}
